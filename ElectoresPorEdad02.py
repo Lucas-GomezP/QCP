@@ -109,11 +109,11 @@ def electores_por_edad(df):
   st.subheader("📊 Porcentaje de participación por rango etario (solo personas con información)")
   st.dataframe(tabla_pct)
 
-def pagina2():
+def pagina2(df):
   st.title("Participación por rango etario")
   col1, col2 = st.columns(2)
   with col1:
-    df = pd.read_csv("./data/padron_con_voto_septiembre.tsv", sep="\t")
+    # df = pd.read_csv("./data/padron_con_voto_septiembre.tsv", sep="\t")
     electores_por_edad(df)
   with col2:
     st.text("Cambiar cuando se tenga el padron de octubre")

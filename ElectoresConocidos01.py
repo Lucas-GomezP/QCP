@@ -73,12 +73,12 @@ def elecotes_conocidos_octubre():
   st.subheader("Análisis de Votantes (Octubre)")
   st.write("Cambiar cuando se tenga el padron de octubre")
 
-def pagina1():
+def pagina1(df):
   st.title("Análisis de Votantes")
   col1, col2 = st.columns(2)
   with col1:
     st.subheader("(Septiembre)")
-    df = pd.read_csv("./data/padron_con_voto_septiembre.tsv", sep="\t")
+    # df = pd.read_csv("./data/padron_con_voto_septiembre.tsv", sep="\t")
     elecotes_conocidos(df)
   with col2:
     elecotes_conocidos_octubre()
