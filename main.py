@@ -121,7 +121,7 @@ with st.sidebar:
     # Selector de página
     st.session_state["pagina_actual"] = st.radio(
       "📄 Navegación",
-      ["Análisis de Votantes", "Analisis de Edad", "Página 3"],
+      ["Análisis de Votantes", "Analisis de Edad", "Analisis por Zona"],
     )
 
     if st.button("Cerrar sesión"):
@@ -139,10 +139,7 @@ from ElectoresConocidos01 import pagina1
 
 from ElectoresPorEdad02 import pagina2
 
-def pagina3():
-    st.title("📄 Página 3")
-    st.write("Contenido de la tercera página.")
-    # Más cosas luego
+from ElectoresPorZonaConocidos import pagina3
 
 
 # ========================
@@ -150,13 +147,16 @@ def pagina3():
 # ========================
 if st.session_state["login"]:
   pagina = st.session_state.get("pagina_actual", "Página 1")
-  df = load_tsv_from_supabase("padron", "padron_con_voto_geolocalizado.tsv")
+  # df = load_tsv_from_supabase("padron", "padron/padron_con_voto_geolocalizado.tsv")
+  # files = supabase.storage.from_("padron").list()
+  # st.write(files)
+  df = pd.read_csv("./data/padron_con_voto_geolocalizado.tsv", sep="\t")
   if pagina == "Análisis de Votantes":
     pagina1(df)
   elif pagina == "Analisis de Edad":
     pagina2(df)
-  elif pagina == "Página 3":
-    pagina3()
+  elif pagina == "Analisis por Zona":
+    pagina3(df)
 
 else:
   st.title("Bienvenido a QCP 🗳")

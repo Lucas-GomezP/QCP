@@ -30,7 +30,7 @@ def electores_por_edad(df):
     elif 45 <= edad <= 60:
       return "45-60"
     elif edad > 60:
-      return "60+"
+      return "61+"
     else:
       return None  # menores de 16 se descartan
 
@@ -64,7 +64,7 @@ def electores_por_edad(df):
     y=["Votó", "No votó"],
     barmode="group",
     title="Participación electoral por rango etario",
-    category_orders={"rango_edad": ["16-24", "25-30", "31-44", "45-60", "60+"]},
+    category_orders={"rango_edad": ["16-24", "25-30", "31-44", "45-60", "61+"]},
     color_discrete_map={
       "Voto": "#2ecc71",
       "No voto": "#e74c3c"
@@ -104,7 +104,7 @@ def electores_por_edad(df):
   ).round(2)
 
   # Orden lógico
-  tabla_pct = tabla_pct.loc[["16-24", "25-30", "31-44", "45-60", "60+"]]
+  tabla_pct = tabla_pct.loc[["16-24", "25-30", "31-44", "45-60", "61+"]]
 
   st.subheader("📊 Porcentaje de participación por rango etario (solo personas con información)")
   st.dataframe(tabla_pct)

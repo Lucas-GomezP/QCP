@@ -45,11 +45,11 @@ def elecotes_conocidos(df):
 
   conteo_tf = df_filtrado["voto_septiembre"].value_counts().reset_index()
   conteo_tf.columns = ["voto_septiembre", "cantidad"]
-  conteo_tf["voto_septiembre"] = conteo_tf["voto"].map({True: "Votó", False: "No votó"})
+  conteo_tf["voto_septiembre"] = conteo_tf["voto_septiembre"].map({True: "Votó", False: "No votó"})
 
   fig2 = px.pie(
     conteo_tf,
-    names="voto",
+    names="voto_septiembre",
     labels=["Votos efectuados", "Votos no efectuados"],
     values="cantidad",
     title="Votantes conocidos (Votó vs No votó)",
