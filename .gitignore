@@ -1,1 +1,6 @@
-.streamlit/*
+.vscode/
+*.pyc
+__pycache__/
+.venv/
+.env
+/secrets/
