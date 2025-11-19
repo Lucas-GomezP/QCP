@@ -9,7 +9,7 @@ def elecotes_conocidos(df):
   # True o False (tienen info) vs None (no hay información)
   # ===============================================================
 
-  df["tiene_informacion"] = df["voto"].apply(lambda x: "Con información" if x in [True, False] else "Sin información")
+  df["tiene_informacion"] = df["voto_septiembre"].apply(lambda x: "Con información" if x in [True, False] else "Sin información")
 
   conteo_info = df["tiene_informacion"].value_counts().reset_index()
   conteo_info.columns = ["categoria", "cantidad"]
@@ -41,11 +41,11 @@ def elecotes_conocidos(df):
   # True vs False (solo personas con información)
   # ===============================================================
 
-  df_filtrado = df[df["voto"].isin([True, False])]
+  df_filtrado = df[df["voto_septiembre"].isin([True, False])]
 
-  conteo_tf = df_filtrado["voto"].value_counts().reset_index()
-  conteo_tf.columns = ["voto", "cantidad"]
-  conteo_tf["voto"] = conteo_tf["voto"].map({True: "Votó", False: "No votó"})
+  conteo_tf = df_filtrado["voto_septiembre"].value_counts().reset_index()
+  conteo_tf.columns = ["voto_septiembre", "cantidad"]
+  conteo_tf["voto_septiembre"] = conteo_tf["voto"].map({True: "Votó", False: "No votó"})
 
   fig2 = px.pie(
     conteo_tf,

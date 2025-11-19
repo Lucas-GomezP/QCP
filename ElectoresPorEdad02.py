@@ -43,15 +43,15 @@ def electores_por_edad(df):
   # Limpiar columna voto
   # ============================
   # Convertimos a booleano real o None
-  df["voto"] = df["voto"].map(lambda x: True if x is True else (False if x is False else None))
+  df["voto"] = df["voto_septiembre"].map(lambda x: True if x is True else (False if x is False else None))
 
   # Sacar las filas con voto = None (gente sin información de voto)
-  df_votos = df.dropna(subset=["voto"])
+  df_votos = df.dropna(subset=["voto_septiembre"])
 
   # ============================
   # Agrupar y contar
   # ============================
-  conteo = df_votos.groupby(["rango_edad", "voto"]).size().unstack(fill_value=0)
+  conteo = df_votos.groupby(["rango_edad", "voto_septiembre"]).size().unstack(fill_value=0)
   conteo.columns = ["No votó", "Votó"]
   conteo = conteo[["Votó", "No votó"]]  # orden lógico
 
@@ -84,13 +84,13 @@ def electores_por_edad(df):
   # ============================
 
   # Usamos SOLO personas con información (True/False)
-  df_info = df.dropna(subset=["voto"])
+  df_info = df.dropna(subset=["voto_septiembre"])
 
   # Total por rango (solo con info real)
   totales = df_info.groupby("rango_edad").size()
 
   # Cantidad que votaron por rango
-  votaron = df_info[df_info["voto"] == True].groupby("rango_edad").size()
+  votaron = df_info[df_info["voto_septiembre"] == True].groupby("rango_edad").size()
 
   # Construir tabla
   tabla_pct = pd.DataFrame({
