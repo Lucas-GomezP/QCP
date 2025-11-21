@@ -121,7 +121,7 @@ with st.sidebar:
     # Selector de página
     st.session_state["pagina_actual"] = st.radio(
       "📄 Navegación",
-      ["Análisis de Votantes", "Analisis de Edad", "Analisis por Zona"],
+      ["Análisis de Votantes", "Analisis de Edad", "Analisis por Zona", "INFERIR SEGUN YO"],
     )
 
     if st.button("Cerrar sesión"):
@@ -139,7 +139,9 @@ from ElectoresConocidos01 import pagina1
 
 from ElectoresPorEdad02 import pagina2
 
-from ElectoresPorZonaConocidos import pagina3
+from ElectoresPorZonaConocidos03 import pagina3
+
+from InferirVotantes04 import inferir_votantes_octubre
 
 
 # ========================
@@ -157,6 +159,8 @@ if st.session_state["login"]:
     pagina2(df)
   elif pagina == "Analisis por Zona":
     pagina3(df)
+  elif pagina == "INFERIR SEGUN YO":
+    inferir_votantes_octubre()
 
 else:
   st.title("Bienvenido a QCP 🗳")
