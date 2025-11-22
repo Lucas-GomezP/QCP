@@ -121,7 +121,7 @@ with st.sidebar:
     # Selector de página
     st.session_state["pagina_actual"] = st.radio(
       "📄 Navegación",
-      ["Análisis de Votantes", "Analisis de Edad", "Analisis por Zona", "INFERIR SEGUN YO"],
+      ["Introduccion", "Análisis de Votantes", "Analisis de Edad", "Analisis por Zona", "Probabilidades"],
     )
 
     if st.button("Cerrar sesión"):
@@ -134,13 +134,10 @@ with st.sidebar:
 # PÁGINAS COMO FUNCIONES
 # ========================
 
+from Introduccion00 import pagina0
 from ElectoresConocidos01 import pagina1
-
-
 from ElectoresPorEdad02 import pagina2
-
 from ElectoresPorZonaConocidos03 import pagina3
-
 from InferirVotantes04 import inferir_votantes_octubre
 
 
@@ -153,13 +150,15 @@ if st.session_state["login"]:
   # files = supabase.storage.from_("padron").list()
   # st.write(files)
   df = pd.read_csv("./data/padron_con_voto_geolocalizado.tsv", sep="\t")
-  if pagina == "Análisis de Votantes":
+  if pagina == "Introduccion":
+    pagina0()
+  elif pagina == "Análisis de Votantes":
     pagina1(df)
   elif pagina == "Analisis de Edad":
     pagina2(df)
   elif pagina == "Analisis por Zona":
     pagina3(df)
-  elif pagina == "INFERIR SEGUN YO":
+  elif pagina == "Probabilidades":
     inferir_votantes_octubre()
 
 else:

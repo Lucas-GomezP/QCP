@@ -20,7 +20,8 @@ def inferir_votantes_octubre():
   # -----------------------------
   # HEATMAP (primer gráfico)
   # -----------------------------
-  st.subheader("Heatmap de θ por franja x partido")
+  st.subheader("Grafico de calor")
+  st.markdown("Este mapa de calor muestra **cómo varía la probabilidad estimada (θ)** de que una persona de cierta franja etaria vote a determinado partido.")
 
   df_heat = df_theta.set_index("age_group")
 
@@ -39,9 +40,6 @@ def inferir_votantes_octubre():
 
   st.plotly_chart(fig_heatmap, width="stretch")
   st.markdown("""
-  ### ¿Qué muestra este gráfico?
-  Este mapa de calor muestra **cómo varía la probabilidad estimada (θ)** de que una persona de cierta franja etaria vote a determinado partido.
-
   ### ¿Cómo leerlo?
   - Cada **fila** es una franja etaria.
   - Cada **columna** es un partido.
@@ -51,8 +49,8 @@ def inferir_votantes_octubre():
 
   ### ¿Para qué sirve?
   Permite ver **tendencias generales**, por ejemplo:
-  - qué partidos son más fuertes en edades jóvenes o mayores;
-  - dónde hay patrones homogéneos o contrastes entre grupos.
+  - Qué partidos son más fuertes en edades jóvenes o mayores;
+  - Dónde hay patrones homogéneos o contrastes entre grupos.
   """)
 
   st.markdown("---")
