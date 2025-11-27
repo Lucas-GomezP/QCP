@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-def elecotes_conocidos(df):
+def elecotes_conocidos(df, column):
 
   # ===============================================================
   # 1️⃣ PRIMER GRÁFICO  
   # True o False (tienen info) vs None (no hay información)
   # ===============================================================
 
-  df["tiene_informacion"] = df["voto_septiembre"].apply(lambda x: "Con información" if x in [True, False] else "Sin información")
+  df["tiene_informacion"] = df[column].apply(lambda x: "Con información" if x in [True, False] else "Sin información")
 
   conteo_info = df["tiene_informacion"].value_counts().reset_index()
   conteo_info.columns = ["categoria", "cantidad"]
@@ -41,15 +41,15 @@ def elecotes_conocidos(df):
   # True vs False (solo personas con información)
   # ===============================================================
 
-  df_filtrado = df[df["voto_septiembre"].isin([True, False])]
+  df_filtrado = df[df[column].isin([True, False])]
 
-  conteo_tf = df_filtrado["voto_septiembre"].value_counts().reset_index()
-  conteo_tf.columns = ["voto_septiembre", "cantidad"]
-  conteo_tf["voto_septiembre"] = conteo_tf["voto_septiembre"].map({True: "Votó", False: "No votó"})
+  conteo_tf = df_filtrado[column].value_counts().reset_index()
+  conteo_tf.columns = [column, "cantidad"]
+  conteo_tf[column] = conteo_tf[column].map({True: "Votó", False: "No votó"})
 
   fig2 = px.pie(
     conteo_tf,
-    names="voto_septiembre",
+    names=column,
     labels=["Votos efectuados", "Votos no efectuados"],
     values="cantidad",
     title="Votantes conocidos (Votó vs No votó)",
@@ -79,8 +79,9 @@ def pagina1(df):
   with col1:
     st.subheader("(Septiembre)")
     # df = pd.read_csv("./data/padron_con_voto_septiembre.tsv", sep="\t")
-    elecotes_conocidos(df)
+    elecotes_conocidos(df, "voto_septiembre")
   with col2:
     elecotes_conocidos_octubre()
     # df = pd.read_csv("./data/padron_con_voto_octubre.tsv", sep="\t")
     # elecotes_conocidos(df, "Octubre")
+    # elecotes_conocidos(df, "voto_octubre")

@@ -138,7 +138,7 @@ from Introduccion00 import pagina0
 from ElectoresConocidos01 import pagina1
 from ElectoresPorEdad02 import pagina2
 from ElectoresPorZonaConocidos03 import pagina3
-from InferirVotantes04 import inferir_votantes_octubre
+from InferirVotantes04 import inferir_votantes_octubre, inferir_votantes_septiembre
 
 
 # ========================
@@ -159,6 +159,10 @@ if st.session_state["login"]:
   elif pagina == "Analisis por Zona":
     pagina3(df)
   elif pagina == "Probabilidades":
+    inferir_votantes_septiembre()
+    st.markdown("---")
+    st.markdown("---")
+    st.markdown("---")
     inferir_votantes_octubre()
 
 else:
